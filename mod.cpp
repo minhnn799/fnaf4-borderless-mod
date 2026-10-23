@@ -43,7 +43,7 @@ static BOOL IsGameFile(HANDLE file){
 static void ApplyRuntimeSettings(){
  BYTE* app=*(BYTE**)((BYTE*)gameModule+0xac9ac);
  if(!app || *(DWORD*)(app+0x10)!=112 || *(WORD*)(app+0x14)!=0xbc82)return;
- *(WORD*)(app+0x14)=(*(WORD*)(app+0x14)&~(0x400|0x800|0x100|4))|16|2;
+ *(WORD*)(app+0x14)=(*(WORD*)(app+0x14)&~0x800)|0x10; // Preserve other flags to keep gameplay audio working.
  app[0x390]=1;
  wchar_t ini[MAX_PATH];GetModuleFileNameW(selfModule,ini,MAX_PATH);wchar_t* slash=wcsrchr(ini,L'\\');if(slash)wcscpy_s(slash+1,MAX_PATH-(slash+1-ini),L"fnaf4-mod.ini");
  unlockFPS=GetPrivateProfileIntW(L"Mod",L"UnlockFPS",1,ini)!=0;
