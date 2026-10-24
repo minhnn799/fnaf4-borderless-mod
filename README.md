@@ -7,8 +7,6 @@ A Windows mod for Five Nights at Freddy's 4.
 - Hold left mouse for the flashlight and right mouse to close doors. Ctrl and Shift still work.
 - Optional FPS unlocking.
 
-**Experimental alpha:** FPS unlocking, mouse controls, and Escape-to-menu still need gameplay testing.
-
 ## Installation
 
 1. Download the ZIP from [Releases](https://github.com/minhnn799/fnaf4-borderless-mod/releases).
