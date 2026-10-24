@@ -2,3 +2,9 @@
 /obj/
 /dist/
 *.log
+
+/build/
+*.obj
+*.lib
+*.exp
+*.pdb

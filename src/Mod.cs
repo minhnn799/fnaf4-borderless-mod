@@ -26,7 +26,7 @@ internal static unsafe class Mod
 
     // ---------------------------------------------------------------- startup
 
-    [ModuleInitializer]
+    [UnmanagedCallersOnly(EntryPoint = "ModInitialize", CallConvs = new[] { typeof(CallConvCdecl) })]
     internal static void Attach()
     {
         try
@@ -216,7 +216,7 @@ internal static unsafe class Mod
 
     // ------------------------------------------------------------ API hooks
 
-    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
+    [UnmanagedCallersOnly(EntryPoint = "ModReadFile", CallConvs = new[] { typeof(CallConvStdcall) })]
     static int ReadPatched(nint file, void* buffer, uint count, uint* read, void* overlapped)
     {
         try
@@ -321,8 +321,8 @@ internal static unsafe class Mod
         short state = GetAsyncKeyState(key);
         if (InNight())
         {
-            if (key == VK_CONTROL || key == VK_LCONTROL) state = unchecked((short)(state | (GetAsyncKeyState(VK_LBUTTON) & 0x8000)));
-            if (key == VK_SHIFT || key == VK_LSHIFT) state = unchecked((short)(state | (GetAsyncKeyState(VK_RBUTTON) & 0x8000)));
+            if (key == VK_CONTROL || key == VK_LCONTROL) state = unchecked((short)((ushort)state | (GetAsyncKeyState(VK_LBUTTON) & 0x8000)));
+            if (key == VK_SHIFT || key == VK_LSHIFT) state = unchecked((short)((ushort)state | (GetAsyncKeyState(VK_RBUTTON) & 0x8000)));
         }
         return state;
     }
@@ -333,8 +333,8 @@ internal static unsafe class Mod
         short state = GetKeyState(key);
         if (InNight())
         {
-            if (key == VK_CONTROL || key == VK_LCONTROL) state = unchecked((short)(state | (GetKeyState(VK_LBUTTON) & 0x8000)));
-            if (key == VK_SHIFT || key == VK_LSHIFT) state = unchecked((short)(state | (GetKeyState(VK_RBUTTON) & 0x8000)));
+            if (key == VK_CONTROL || key == VK_LCONTROL) state = unchecked((short)((ushort)state | (GetKeyState(VK_LBUTTON) & 0x8000)));
+            if (key == VK_SHIFT || key == VK_LSHIFT) state = unchecked((short)((ushort)state | (GetKeyState(VK_RBUTTON) & 0x8000)));
         }
         return state;
     }

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <AssemblyName>winmm</AssemblyName>
     <RootNamespace>Fnaf4Mod</RootNamespace>
@@ -20,8 +20,10 @@
     <StripSymbols>true</StripSymbols>
   </PropertyGroup>
 
-  <!-- Exports every winmm function as a forwarder to the real system winmm.dll. -->
+  <!-- Native bootstrap and ABI-preserving WinMM forwarding stubs. -->
   <ItemGroup>
+    <NativeLibrary Include="$(MSBuildProjectDirectory)\native\bootstrap.obj" />
+    <LinkerArg Include="/ENTRY:ModDllEntry" />
     <LinkerArg Include="/DEF:&quot;$(MSBuildProjectDirectory)\winmm.def&quot;" />
   </ItemGroup>
 

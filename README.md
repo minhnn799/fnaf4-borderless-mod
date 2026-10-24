@@ -41,9 +41,9 @@ A copy of the original game is required. No game files are included.
 
 ## Build from source (C#)
 
-This is a C# (.NET NativeAOT) port of the original C++ mod. It still produces a native 32-bit `winmm.dll` proxy.
+This uses C# (.NET 10 NativeAOT) for the mod logic and a small C++ bootstrap for early initialization and WinMM forwarding. It produces one native 32-bit `winmm.dll`; players do not need the .NET SDK or runtime installed.
 
-Requirements: .NET 8 SDK or newer, plus Visual Studio "Desktop development with C++" (MSVC + Windows SDK), which NativeAOT needs for linking.
+Requirements: .NET 10 SDK, plus Visual Studio "Desktop development with C++" (MSVC + Windows SDK), which NativeAOT needs for linking.
 
 ```
 build.cmd
@@ -51,4 +51,4 @@ build.cmd
 
 Output: `build/winmm.dll`. Copy it and `fnaf4-mod.ini` next to the game EXE.
 
-Layout: `src/Mod.cs` (hooks and patches), `src/Native.cs` (Win32 imports), `src/Patches.cs` (supported EXE hashes), `winmm.def` (forwards all 192 winmm exports to the real system DLL).
+Layout: `src/Mod.cs` (hooks and patches), `src/Native.cs` (Win32 imports), `src/Patches.cs` (supported EXE hashes), `native/bootstrap.cpp` and `native/proxy-exports.h` (native startup bridge and 192 WinMM forwarding stubs), and `winmm.def` (export names and ordinals).
