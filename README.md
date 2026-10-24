@@ -39,6 +39,16 @@ Supports specific Windows builds of FNAF 4 v1.1 and Halloween Edition. Other exe
 
 A copy of the original game is required. No game files are included.
 
-## Build from source
+## Build from source (C#)
 
-With Visual Studio C++ build tools and a Windows SDK installed, run `build.cmd` from an **x86 Native Tools Command Prompt**. Output: `build/winmm.dll`.
+This is a C# (.NET NativeAOT) port of the original C++ mod. It still produces a native 32-bit `winmm.dll` proxy.
+
+Requirements: .NET 8 SDK or newer, plus Visual Studio "Desktop development with C++" (MSVC + Windows SDK), which NativeAOT needs for linking.
+
+```
+build.cmd
+```
+
+Output: `build/winmm.dll`. Copy it and `fnaf4-mod.ini` next to the game EXE.
+
+Layout: `src/Mod.cs` (hooks and patches), `src/Native.cs` (Win32 imports), `src/Patches.cs` (supported EXE hashes), `winmm.def` (forwards all 192 winmm exports to the real system DLL).

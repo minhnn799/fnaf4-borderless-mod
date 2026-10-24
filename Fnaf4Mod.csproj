@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>winmm</AssemblyName>
+    <RootNamespace>Fnaf4Mod</RootNamespace>
+
+    <!-- The game is 32-bit, so the proxy DLL must be x86 native code. -->
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+    <PublishAot>true</PublishAot>
+    <NativeLib>Shared</NativeLib>
+    <SelfContained>true</SelfContained>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <IlcOptimizationPreference>Size</IlcOptimizationPreference>
+    <StripSymbols>true</StripSymbols>
+  </PropertyGroup>
+
+  <!-- Exports every winmm function as a forwarder to the real system winmm.dll. -->
+  <ItemGroup>
+    <LinkerArg Include="/DEF:&quot;$(MSBuildProjectDirectory)\winmm.def&quot;" />
+  </ItemGroup>
+
+</Project>

@@ -1,12 +1,11 @@
 @echo off
 setlocal
-where cl >nul 2>nul
+where dotnet >nul 2>nul
 if errorlevel 1 (
-  echo Run this from an x86 Native Tools Command Prompt for Visual Studio.
+  echo .NET 8 SDK or newer is required.
   exit /b 1
 )
 cd /d "%~dp0"
-if not exist build mkdir build
-cl /nologo /LD /MT /O2 /EHsc /W3 /Fo:build\mod.obj mod.cpp /link /MACHINE:X86 /DEF:winmm.def /OUT:build\winmm.dll /IMPLIB:build\winmm.lib
+rem NativeAOT also needs "Desktop development with C++" (MSVC + Windows SDK) installed.
+dotnet publish Fnaf4Mod.csproj -c Release -r win-x86 -o build
 exit /b %errorlevel%
-
