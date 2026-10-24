@@ -14,8 +14,6 @@ A Windows mod for Five Nights at Freddy's 4.
 3. Extract `winmm.dll` and `fnaf4-mod.ini` into the same folder as the game EXE.
 4. Start the game normally.
 
-If another mod already uses `winmm.dll`, do not overwrite it. The mods cannot be combined automatically.
-
 ## Settings
 
 In `fnaf4-mod.ini`:
